@@ -1,0 +1,3 @@
+stackHandler.handler.Main -> stackHandler.handler.Main:
+    void <init>() -> <init>
+    void main(java.lang.String[]) -> main

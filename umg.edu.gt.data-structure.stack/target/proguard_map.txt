@@ -1,0 +1,22 @@
+umg.edu.gt.data_structure.stack.Main -> a.a.a.a.a.a:
+    void <init>() -> <init>
+    void main(java.lang.String[]) -> a
+umg.edu.gt.data_structure.stack.impl.SymbolValidator -> a.a.a.a.a.a.a:
+    void <init>() -> <init>
+    boolean isBalanced(java.lang.String) -> a
+    boolean isPair(char,char) -> a
+umg.edu.gt.data_structure.stack.manual.Node -> a.a.a.a.a.b.a:
+    char value -> a
+    umg.edu.gt.data_structure.stack.manual.Node next -> b
+    int count -> c
+    void <init>(char,umg.edu.gt.data_structure.stack.manual.Node,int) -> <init>
+umg.edu.gt.data_structure.stack.manual.StackLinked -> a.a.a.a.a.b.b:
+    umg.edu.gt.data_structure.stack.manual.Node top -> a
+    void <init>() -> <init>
+    boolean isEmpty() -> a
+    void initStack(char) -> a
+    void push(char) -> b
+    int size() -> b
+    char pop() -> c
+    char peek() -> d
+    char nodeinit() -> e

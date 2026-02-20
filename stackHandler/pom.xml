@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>umg.edu.gt.data-structure</groupId>
+	<artifactId>stackHandler</artifactId>
+	<version>0.0.3-SNAPSHOT</version>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>umg.edu.gt.data-structure</groupId>
+			<artifactId>umg.edu.gt.data-structure.stack</artifactId>
+			<version>0.0.3-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.14.0</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.4.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>stackHandler.handler.Main</mainClass>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>libs/</classpathPrefix> </manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.8.1</version>
+				<executions>
+					<execution>
+						<id>copy-runtime-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/libs</outputDirectory>
+							<includeScope>runtime</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+    <id>obfuscate</id>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.7.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <injar>${project.build.finalName}.jar</injar>
+                    <outjar>${project.build.finalName}-obf.jar</outjar>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <obfuscate>true</obfuscate>
+                    <!-- Forzamos el uso de dependencias del proyecto -->
+                    <includeDependency>true</includeDependency>
+                    <libs>
+                        <!-- Incluimos el módulo base de Java 11+ -->
+                        <lib>${java.home}/jmods/java.base.jmod</lib>
+                    </libs>
+                    <options>
+                        <option>-dontwarn</option>
+                        <option>-ignorewarnings</option>
+                        <option>-dontoptimize</option>
+                        <option>-dontshrink</option>
+                        <!-- Mantenemos el punto de entrada principal -->
+                        <option>-keep public class stackHandler.handler.Main { public static void main(java.lang.String[]); }</option>
+                    </options>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.guardsquare</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>7.7.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</profile>
+
+	</profiles>
+</project>
